@@ -240,45 +240,45 @@ style choice_button_text is default:
 ## The quick menu is displayed in-game to provide easy access to the out-of-game
 ## menus.
 
-screen quick_menu():
+#screen quick_menu():
 
     ## Ensure this appears on top of other screens.
-    zorder 100
+#    zorder 100
 
-    if quick_menu:
+#    if quick_menu:
 
-        hbox:
-            style_prefix "quick"
+#        hbox:
+#            style_prefix "quick"
 
-            xalign 0.5
-            yalign 1.0
+#            xalign 0.5
+#            yalign 1.0
 
-            textbutton _("Back") action Rollback()
-            textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
+#            textbutton _("Back") action Rollback()
+#            textbutton _("History") action ShowMenu('history')
+#            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
+#            textbutton _("Auto") action Preference("auto-forward", "toggle")
+#            textbutton _("Save") action ShowMenu('save')
+#            textbutton _("Q.Save") action QuickSave()
+#            textbutton _("Q.Load") action QuickLoad()
+#            textbutton _("Prefs") action ShowMenu('preferences')
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
 ## the player has not explicitly hidden the interface.
-init python:
-    config.overlay_screens.append("quick_menu")
+#init python:
+#    config.overlay_screens.append("quick_menu")
 
-default quick_menu = True
+#default quick_menu = True
 
-style quick_button is default
-style quick_button_text is button_text
+#style quick_button is default
+#style quick_button_text is button_text
 
-style quick_button:
-    properties gui.button_properties("quick_button")
+#style quick_button:
+#    properties gui.button_properties("quick_button")
 
-style quick_button_text:
-    properties gui.button_text_properties("quick_button")
-
+#style quick_button_text:
+#    properties gui.button_text_properties("quick_button")
+#Menu#
 
 ################################################################################
 ## Main and Game Menu Screens
@@ -301,17 +301,17 @@ screen navigation():
 
         if main_menu:
 
-            textbutton _("Start") action Start()
+            textbutton _("Iniciar") action Start()
 
         else:
 
-            textbutton _("History") action ShowMenu("history")
+            textbutton _("História") action ShowMenu("history")
 
-            textbutton _("Save") action ShowMenu("save")
+            textbutton _("Salvar") action ShowMenu("save")
 
-        textbutton _("Load") action ShowMenu("load")
+        textbutton _("Carregar") action ShowMenu("load")
 
-        textbutton _("Preferences") action ShowMenu("preferences")
+        textbutton _("Preferências") action ShowMenu("preferences")
 
         if _in_replay:
 
@@ -319,20 +319,20 @@ screen navigation():
 
         elif not main_menu:
 
-            textbutton _("Main Menu") action MainMenu()
+            textbutton _("Menu Inicial") action MainMenu()
 
-        textbutton _("About") action ShowMenu("about")
+        textbutton _("Sobre") action ShowMenu("about")
 
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
             ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Help") action ShowMenu("help")
+            textbutton _("Ajuda") action ShowMenu("help")
 
         if renpy.variant("pc"):
 
             ## The quit button is banned on iOS and unnecessary on Android and
             ## Web.
-            textbutton _("Quit") action Quit(confirm=not main_menu)
+            textbutton _("Sair") action Quit(confirm=not main_menu)
 
 
 style navigation_button is gui_button
