@@ -7,6 +7,11 @@ define bella = Character("Bella")
 define beatriz = Character("Beatriz")
 define prince = Character("Princesa")
 define bianka = Character("Bianka")
+define gemeas = Character("Gêmeas")
+define bryan = Character("Bryan")
+define bryanne = Character("Bryanne")
+define bia = Character("Bia")
+define breno = Character("Breno")
 
 #define cenario
 image menu_cap1 = "images/cenarios/menu_cap1.png"
@@ -62,7 +67,17 @@ screen cap3:
 
         hotspot(0, 4, 1918, 1072) action Jump("breno")
 
+#_______________________________________________________________________________
 
+
+
+
+
+
+
+
+
+#[SISTEMA DE MOVIMENTO]---------------------------------------------------------
 
 label bella:
     pro "capitulo 1, Bella"
