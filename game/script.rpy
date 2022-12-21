@@ -1,4 +1,7 @@
 #init python
+init python:
+    dia = True
+#dia = True, noite = False
 
 #define fala
 
