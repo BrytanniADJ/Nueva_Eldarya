@@ -157,7 +157,7 @@ style say_dialogue:
     properties gui.text_properties("dialogue")
 
     xpos gui.dialogue_xpos
-    xsize gui.dialogue_width
+    xsize 1350
     ypos gui.dialogue_ypos
 
 
@@ -294,10 +294,23 @@ screen navigation():
     vbox:
         style_prefix "navigation"
 
+        if main_menu:
+            xalign -0.2
+        else:
+            xoffset 38
+            spacing 40
+
         xpos gui.navigation_xpos
         yalign 0.5
 
         spacing gui.navigation_spacing
+        if _in_replay:
+
+            textbutton _("End Replay") action EndReplay(confirm=True)
+
+        elif not main_menu:
+
+            textbutton _("Menu Inicial") action MainMenu()
 
         if main_menu:
 
@@ -313,20 +326,8 @@ screen navigation():
 
         textbutton _("Preferências") action ShowMenu("preferences")
 
-        if _in_replay:
-
-            textbutton _("End Replay") action EndReplay(confirm=True)
-
-        elif not main_menu:
-
-            textbutton _("Menu Inicial") action MainMenu()
-
-        textbutton _("Sobre") action ShowMenu("about")
-
-        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
-
             ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Ajuda") action ShowMenu("help")
+
 
         if renpy.variant("pc"):
 
@@ -344,6 +345,8 @@ style navigation_button:
 
 style navigation_button_text:
     properties gui.button_text_properties("navigation_button")
+    selected_color "#520000"
+    xalign 0.5
 
 
 ## Main Menu screen ############################################################
@@ -356,9 +359,13 @@ screen main_menu():
 
     ## This ensures that any other menu screen is replaced.
     tag menu
-
+#-------------------------------------------------------------------------------
     add gui.main_menu_background
-
+    #add Movie(size=(1920, 1080))
+    #on "show" action Play("movie_menu", "videos/video.avi", loop=True)
+    #on "hide" action Stop("movie_menu")
+    #on "replaced" action Stop("movie_menu")
+#-------------------------------------------------------------------------------
     ## This empty frame darkens the main menu.
     frame:
         style "main_menu_frame"
@@ -473,7 +480,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 
     use navigation
 
-    textbutton _("Return"):
+    textbutton _("Retornar"):
         style "return_button"
 
         action Return()
@@ -533,7 +540,7 @@ style game_menu_label_text:
 style return_button:
     xpos gui.navigation_xpos
     yalign 1.0
-    yoffset -45
+    yoffset -38
 
 
 ## About screen ################################################################
@@ -557,13 +564,13 @@ screen about():
         vbox:
 
             label "[config.name!t]"
-            text _("Version [config.version!t]\n")
+            text _("Versão [config.version!t]\n")
 
             ## gui.about is usually set in options.rpy.
             if gui.about:
                 text "[gui.about!t]\n"
 
-            text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
+            text _("Fangame criado por Brytanni.\nRepositório no {a=https://github.com/BrytanniADJ/Nueva_Eldarya}GitHub.{/a} \n\n[renpy.license!t]")
 
 
 style about_label is gui_label
@@ -587,19 +594,19 @@ screen save():
 
     tag menu
 
-    use file_slots(_("Save"))
+    use file_slots(_("Salvar"))
 
 
 screen load():
 
     tag menu
 
-    use file_slots(_("Load"))
+    use file_slots(_("Carregar"))
 
 
 screen file_slots(title):
 
-    default page_name_value = FilePageNameInputValue(pattern=_("Page {}"), auto=_("Automatic saves"), quick=_("Quick saves"))
+    default page_name_value = FilePageNameInputValue(pattern=_("Page {}"), auto=_("Automatic saves"), quick=_("Salvamentos"))
 
     use game_menu(title):
 
@@ -716,7 +723,7 @@ screen preferences():
 
     tag menu
 
-    use game_menu(_("Preferences"), scroll="viewport"):
+    use game_menu(_("Preferências"), scroll="viewport"):
 
         vbox:
 
@@ -886,7 +893,7 @@ screen history():
     ## Avoid predicting this screen, as it can be very large.
     predict False
 
-    use game_menu(_("History"), scroll=("vpgrid" if gui.history_height else "viewport"), yinitial=1.0):
+    use game_menu(_("História"), scroll=("vpgrid" if gui.history_height else "viewport"), yinitial=1.0):
 
         style_prefix "history"
 
@@ -914,7 +921,7 @@ screen history():
                     substitute False
 
         if not _history_list:
-            label _("The dialogue history is empty.")
+            label _("Os diálogos da História aparecerão aqui")
 
 
 ## This determines what tags are allowed to be displayed on the history screen.
@@ -968,139 +975,6 @@ style history_label_text:
 ## A screen that gives information about key and mouse bindings. It uses other
 ## screens (keyboard_help, mouse_help, and gamepad_help) to display the actual
 ## help.
-
-screen help():
-
-    tag menu
-
-    default device = "keyboard"
-
-    use game_menu(_("Help"), scroll="viewport"):
-
-        style_prefix "help"
-
-        vbox:
-            spacing 23
-
-            hbox:
-
-                textbutton _("Keyboard") action SetScreenVariable("device", "keyboard")
-                textbutton _("Mouse") action SetScreenVariable("device", "mouse")
-
-                if GamepadExists():
-                    textbutton _("Gamepad") action SetScreenVariable("device", "gamepad")
-
-            if device == "keyboard":
-                use keyboard_help
-            elif device == "mouse":
-                use mouse_help
-            elif device == "gamepad":
-                use gamepad_help
-
-
-screen keyboard_help():
-
-    hbox:
-        label _("Enter")
-        text _("Advances dialogue and activates the interface.")
-
-    hbox:
-        label _("Space")
-        text _("Advances dialogue without selecting choices.")
-
-    hbox:
-        label _("Arrow Keys")
-        text _("Navigate the interface.")
-
-    hbox:
-        label _("Escape")
-        text _("Accesses the game menu.")
-
-    hbox:
-        label _("Ctrl")
-        text _("Skips dialogue while held down.")
-
-    hbox:
-        label _("Tab")
-        text _("Toggles dialogue skipping.")
-
-    hbox:
-        label _("Page Up")
-        text _("Rolls back to earlier dialogue.")
-
-    hbox:
-        label _("Page Down")
-        text _("Rolls forward to later dialogue.")
-
-    hbox:
-        label "H"
-        text _("Hides the user interface.")
-
-    hbox:
-        label "S"
-        text _("Takes a screenshot.")
-
-    hbox:
-        label "V"
-        text _("Toggles assistive {a=https://www.renpy.org/l/voicing}self-voicing{/a}.")
-
-    hbox:
-        label "Shift+A"
-        text _("Opens the accessibility menu.")
-
-
-screen mouse_help():
-
-    hbox:
-        label _("Left Click")
-        text _("Advances dialogue and activates the interface.")
-
-    hbox:
-        label _("Middle Click")
-        text _("Hides the user interface.")
-
-    hbox:
-        label _("Right Click")
-        text _("Accesses the game menu.")
-
-    hbox:
-        label _("Mouse Wheel Up\nClick Rollback Side")
-        text _("Rolls back to earlier dialogue.")
-
-    hbox:
-        label _("Mouse Wheel Down")
-        text _("Rolls forward to later dialogue.")
-
-
-screen gamepad_help():
-
-    hbox:
-        label _("Right Trigger\nA/Bottom Button")
-        text _("Advances dialogue and activates the interface.")
-
-    hbox:
-        label _("Left Trigger\nLeft Shoulder")
-        text _("Rolls back to earlier dialogue.")
-
-    hbox:
-        label _("Right Shoulder")
-        text _("Rolls forward to later dialogue.")
-
-
-    hbox:
-        label _("D-Pad, Sticks")
-        text _("Navigate the interface.")
-
-    hbox:
-        label _("Start, Guide")
-        text _("Accesses the game menu.")
-
-    hbox:
-        label _("Y/Top Button")
-        text _("Hides the user interface.")
-
-    textbutton _("Calibrate") action GamepadCalibrate()
-
 
 style help_button is gui_button
 style help_button_text is gui_button_text
@@ -1164,8 +1038,8 @@ screen confirm(message, yes_action, no_action):
                 xalign 0.5
                 spacing 150
 
-                textbutton _("Yes") action yes_action
-                textbutton _("No") action no_action
+                textbutton _("Sim") action yes_action
+                textbutton _("Não") action no_action
 
     ## Right-click and escape answer "no".
     key "game_menu" action no_action

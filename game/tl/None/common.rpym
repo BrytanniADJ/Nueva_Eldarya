@@ -431,35 +431,35 @@ translate None strings:
 
     # renpy/common/00gui.rpy:423
     old "Are you sure?"
-    new "Are you sure?"
+    new "Certeza?"
 
     # renpy/common/00gui.rpy:424
     old "Are you sure you want to delete this save?"
-    new "Are you sure you want to delete this save?"
+    new "Deseja excluir esse salvamento?"
 
     # renpy/common/00gui.rpy:425
     old "Are you sure you want to overwrite your save?"
-    new "Are you sure you want to overwrite your save?"
+    new "Deseja substituir o salvamento?"
 
     # renpy/common/00gui.rpy:426
     old "Loading will lose unsaved progress.\nAre you sure you want to do this?"
-    new "Loading will lose unsaved progress.\nAre you sure you want to do this?"
+    new "Ao carregar, o progresso não salvo será perdido.\nDeseja fazer isso?"
 
     # renpy/common/00gui.rpy:427
     old "Are you sure you want to quit?"
-    new "Are you sure you want to quit?"
+    new "Deseja sair?"
 
     # renpy/common/00gui.rpy:428
     old "Are you sure you want to return to the main menu?\nThis will lose unsaved progress."
-    new "Are you sure you want to return to the main menu?\nThis will lose unsaved progress."
+    new "Tem certeza de que deseja retornar ao menu principal?\nIsso fará com que o progresso não salvo seja perdido."
 
     # renpy/common/00gui.rpy:429
     old "Are you sure you want to end the replay?"
-    new "Are you sure you want to end the replay?"
+    new "Encerrar o replay?"
 
     # renpy/common/00gui.rpy:430
     old "Are you sure you want to begin skipping?"
-    new "Are you sure you want to begin skipping?"
+    new "Deseja começar a pular?"
 
     # renpy/common/00gui.rpy:431
     old "Are you sure you want to skip to the next choice?"
@@ -483,7 +483,7 @@ translate None strings:
 
     # renpy/common/00library.rpy:281
     old "This program contains free software under a number of licenses, including the MIT License and GNU Lesser General Public License. A complete list of software, including links to full source code, can be found {a=https://www.renpy.org/l/license}here{/a}."
-    new "This program contains free software under a number of licenses, including the MIT License and GNU Lesser General Public License. A complete list of software, including links to full source code, can be found {a=https://www.renpy.org/l/license}here{/a}."
+    new "Essa Fangame foi criada sem objetivo de lucro, é uma meta que estive pra bater a bastante tempo e infelizmente não poderei disponibilizá-lo ao público, pela justificativa de que a equipe da Beemoov ameaçou de entrar em ações legais caso eu o faça, segundo suas palavras (traduzidas):\n\n\nOlá,\n\nSinto muito, mas fangames são proibidos, são violação de direitos autorais.\n\nContanto que seja estritamente privado (somente você, amigos próximos e familiares), não podemos proibi-lo de prosseguir com o desenvolvimento do jogo, mas se ele se tornar publicamente disponível online, você estará enfrentando ações legais.\n\nAtenciosamente\n\nEquipe Beemoov"
 
     # renpy/common/00preferences.rpy:254
     old "display"
@@ -1248,4 +1248,3 @@ translate None strings:
     # renpy/common/00console.rpy:931
     old "unescape: Disables escaping of unicode symbols in unicode strings and print it as is (default)."
     new "unescape: Disables escaping of unicode symbols in unicode strings and print it as is (default)."
-
